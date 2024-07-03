@@ -1,0 +1,33 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+    name: app-dep
+    labels:
+      app: frontend
+
+spec:
+  replicas: 1
+  selector: 
+    matchlabels:
+        app: frontend
+
+  template:
+   matadata:
+    labels:
+     app: frontend
+
+     spec: 
+      container:
+       name: Frontend-app
+       image: -----------
+       port: 5000
+
+        env:
+      - name: MYSQL_HOST
+        value: "10.98.19.211"        
+      - name: MYSQL_PASSWORD
+        value: "admin"
+      - name: MYSQL_USER
+        value: "root"
+      - name: MYSQL_DB
+        value: "mydb"
