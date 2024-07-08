@@ -1,0 +1,37 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+    name: mysql
+    labels:
+      app: frontend
+
+spec:
+  replicas: 1
+  selector: 
+    matchlabels:
+        app: mysql
+
+  template:
+   matadata:
+    labels:
+     app: mysql
+
+     spec: 
+      container:
+       name: Frontend-app
+       image: mysql:latest
+       port: 3306
+
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: app-secret
+            key: db_pass 
+        - name: MYSQL_DATABASE
+        value: "mydb"
+        - name: MYSQL_USER
+              value: "admin"
+        - name: MYSQL_PASSWORD
+              value: "admin"
+        
